@@ -9,7 +9,8 @@ package harjoitustyo.dokumentit;
  * @author Joonas Arola, joonas.arola@tuni.fi.
  */
  
-public abstract class Dokumentti implements Comparable <Dokumentti> {
+import harjoitustyo.apulaiset.*;
+public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <Dokumentti> {
 
     /* 
      * Julkiset luokkavakiot.

@@ -1,5 +1,6 @@
 package harjoitustyo.dokumentit;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Konkreettinen luokka uutisille.
@@ -26,7 +27,7 @@ public class Uutinen extends Dokumentti {
 
     public Uutinen(int uusiTunniste, LocalDate uusiPäivämäärä, String uusiTeksti) throws IllegalArgumentException {
         super(uusiTunniste, uusiTeksti);
-
+        päivämäärä(uusiPäivämäärä);
     }
 
     /*
@@ -59,7 +60,8 @@ public class Uutinen extends Dokumentti {
      */
     @Override
     public String toString() {
+
         String[] osat = super.toString().split(EROTIN);
-        return osat[0] + EROTIN + päivämäärä() + EROTIN + osat[1];
+        return osat[0] + EROTIN + päivämäärä().format(DateTimeFormatter.ofPattern("d.M.yyyy")) + EROTIN + osat[1];
     }
 }
