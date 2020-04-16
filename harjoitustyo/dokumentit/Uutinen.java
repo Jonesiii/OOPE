@@ -1,7 +1,8 @@
 package harjoitustyo.dokumentit;
+import java.time.LocalDate;
 
 /**
- * Konkreettinen luokka vitseille.
+ * Konkreettinen luokka uutisille.
  * <p>
  * Olio-ohjelmoinnin perusteet II, kevät 2020.
  * 
@@ -9,23 +10,23 @@ package harjoitustyo.dokumentit;
  * @author Joonas Arola, joonas.arola@tuni.fi.
  */
  
-public class Vitsi extends Dokumentti {
+public class Uutinen extends Dokumentti {
     /*
      * Attribuutit.
      * 
      */
 
     /** Vitsin laji */
-    private String laji;
+    private LocalDate päivämäärä;
 
     /*
      * Rakentajat
      * 
      */
 
-    public Vitsi(int uusiTunniste, String uusiLaji, String uusiTeksti) throws IllegalArgumentException {
+    public Uutinen(int uusiTunniste, LocalDate uusiPäivämäärä, String uusiTeksti) throws IllegalArgumentException {
         super(uusiTunniste, uusiTeksti);
-        laji(uusiLaji);
+
     }
 
     /*
@@ -33,19 +34,18 @@ public class Vitsi extends Dokumentti {
      * 
      */
 
-    public String laji() {
-        return laji;
+    public LocalDate päivämäärä() {
+        return päivämäärä;
     }
 
-    public void laji(String uusiLaji) throws IllegalArgumentException {
-        if (uusiLaji == null || uusiLaji == "") {
+    public void päivämäärä(LocalDate uusiPäivämäärä) throws IllegalArgumentException {
+        if (uusiPäivämäärä == null) {
             throw new IllegalArgumentException();
         }
         else {
-            laji = uusiLaji;
+            päivämäärä = uusiPäivämäärä;
         }
     }
-
     /*
      * Object-luokan metodien korvaukset.
      * 
@@ -53,13 +53,13 @@ public class Vitsi extends Dokumentti {
 
     /**
      * Muodostaa dokumentin merkkijonoesityksen, joka koostuu yliluokan toStringistä
-     * sekä tämän luokan lajista.
+     * sekä tämän luokan päivämäärästä.
      * 
      * @return dokumentin merkkijonoesitys.
      */
     @Override
     public String toString() {
         String[] osat = super.toString().split(EROTIN);
-        return osat[0] + EROTIN + laji() + EROTIN + osat[1];
+        return osat[0] + EROTIN + päivämäärä() + EROTIN + osat[1];
     }
 }

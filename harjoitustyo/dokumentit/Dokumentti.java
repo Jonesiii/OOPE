@@ -9,7 +9,7 @@ package harjoitustyo.dokumentit;
  * @author Joonas Arola, joonas.arola@tuni.fi.
  */
  
-public abstract class Dokumentti {
+public abstract class Dokumentti implements Comparable <Dokumentti> {
 
     /* 
      * Julkiset luokkavakiot.
@@ -18,6 +18,7 @@ public abstract class Dokumentti {
     
     /** Tietojen erotin kaikille saatavilla olevana vakiona. */
     public static final String EROTIN = "///";
+
     /*
      * Attribuutit.
      * 
@@ -28,6 +29,48 @@ public abstract class Dokumentti {
 
     /** Dokumentin teksti */
     private String teksti;
+
+    /*
+     * Rakentaja
+     * 
+     */
+
+    /** Parametrillinen rakentaja */
+    public Dokumentti(int uusiTunniste, String uusiTeksti) throws IllegalArgumentException {
+        tunniste(uusiTunniste);
+        teksti(uusiTeksti);
+    }
+
+    /*
+     * Aksessorit.
+     * 
+     */
+
+    public int tunniste() {
+        return tunniste;
+    }
+
+    public void tunniste(int uusiTunniste) throws IllegalArgumentException {
+        if (uusiTunniste < 1) {
+            throw new IllegalArgumentException();
+        }
+        else {
+            tunniste = uusiTunniste;
+        }
+    }
+
+    public String teksti() {
+        return teksti;
+    }
+
+    public void teksti(String uusiTeksti) throws IllegalArgumentException {
+        if (uusiTeksti == null || uusiTeksti == "") {
+            throw new IllegalArgumentException();
+        }
+        else {
+            teksti = uusiTeksti;
+        }
+    }
 
     /*
      * Object-luokan metodien korvaukset.
@@ -43,6 +86,43 @@ public abstract class Dokumentti {
     @Override
     public String toString() {
         // Hyodynnetään vakiota, jotta ohjelma olisi joustavampi.
-        return tunniste + EROTIN + teksti;
+        return tunniste() + EROTIN + teksti();
     }
+
+    /**
+     * Vertaa dokumenttien tunnistetta.
+     * 
+     * @return True, jos tunnisteet ovat samat. False, jos eivät.
+     */
+    @Override
+   public boolean equals(Object obj) {
+      try {
+         // liitetään olioon akku-luokan viite
+         Dokumentti toinen = (Dokumentti)obj;
+
+         // dokumentit ovat samat jos niiden varaustasot ovat samat
+         return tunniste == toinen.tunniste();
+      }
+      catch (Exception e) {
+         return false;
+      }
+    }
+
+    /**
+     * Vertaa dokumenttien tunnistetta.
+     * 
+     * @return 0, jos samat. -1, jos pienempi. 1, jos suurempi.
+     */
+   @Override
+   public int compareTo(Dokumentti d) {
+      if (tunniste == d.tunniste) {
+         return 0;
+      }
+      else if (tunniste < d.tunniste) {
+         return -1;
+      }
+      else {
+         return 1;
+      }
+   }
 }
