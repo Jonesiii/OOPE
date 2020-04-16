@@ -1,5 +1,7 @@
 ## Yleistä
 
+Tämä on olio-ohjelmoinnin perusteet 2 -kurssin harjoitustyö.
+
 WETO käyttää aina alkuperäistä _harjoitustyo.apulaiset_-pakkausta. Pakkauksen
 tiedostoja ei siksi ole syytä muuttaa ellet ole Mac- tai Linux-käyttäjä (katso
 alla).
