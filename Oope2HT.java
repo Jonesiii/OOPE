@@ -11,6 +11,7 @@ import java.util.Scanner;
 import harjoitustyo.dokumentit.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
+import harjoitustyo.omalista.*;
 
 public class Oope2HT {
     public static void main(String[] args) {
@@ -54,5 +55,33 @@ public class Oope2HT {
         vitsi.siivoa(lista2, poistettavat2);
         System.out.println(vitsi + "!");
 
+        System.out.println();
+        OmaLista<Object> lista3 = new OmaLista<Object>();
+        lista3.lisää(5);
+        System.out.println(lista3);
+        lista3.lisää(3);
+        System.out.println(lista3);
+        lista3.lisää(7);
+        System.out.println(lista3);
+
+        System.out.println();
+        OmaLista<Object> lista4 = new OmaLista<Object>();
+
+        lista4.lisää("A");
+        System.out.println(lista4);
+        lista4.lisää("C");
+        System.out.println(lista4);
+        lista4.lisää("B");
+        System.out.println(lista4);
+        lista4.lisää("D");
+        System.out.println(lista4);
+
+        System.out.println();
+        OmaLista<Object> lista5 = new OmaLista<Object>();
+
+        lista5.lisää("C");
+        System.out.println(lista5);
+        lista5.lisää("A");
+        System.out.println(lista5);
     }
 }

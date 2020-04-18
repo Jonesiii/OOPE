@@ -1,2 +1,4 @@
-# Estetään tavukoodin lisääminen tietovarastoon.
+﻿# Estetään tavukoodin lisääminen tietovarastoon.
 *.class
+# Estetään zip-tiedostojen lisääminen
+*.zip

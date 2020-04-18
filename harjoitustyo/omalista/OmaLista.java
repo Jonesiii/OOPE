@@ -11,6 +11,8 @@ package harjoitustyo.omalista;
 import java.util.LinkedList;
 import java.util.Comparator;
 import harjoitustyo.apulaiset.*;
+import java.util.Iterator;
+import java.util.stream.*;
 
 public class OmaLista<E> extends LinkedList<E> implements Ooperoiva<E> {
     /**
@@ -38,15 +40,25 @@ public class OmaLista<E> extends LinkedList<E> implements Ooperoiva<E> {
     */
     @SuppressWarnings({"unchecked"})
     public void lisää(E uusi) throws IllegalArgumentException {
-        for (int i = 0; i < super.size(); i++) {
-            // Asetetaan nykyiseen alkioon compareTo-metodiin perustuvan
-            // vertailun mahdollistava apuviite. Tämä on kääntäjän mielestä
-            // vaarallista, koska kieliopillisesti ei voida päätellä onko
-            // lisättävän olion luokalla Comparable-toteutus. Kääntäjän
-            // mutinat estetään annotaatiolla @SuppressWarnings({"unchecked"})
-            Comparable nykyinen = (Comparable)get(ind);
-            if (nykyinen.compareTo(uusi) == 1 && ) {
-            ...
+        try {
+            Comparable uusi1 = (Comparable)uusi;
+            if (uusi == null) {
+                throw new IllegalArgumentException();
             }
-   }
+            else {
+                // Käydään lista läpi hyödyntämällä streamia, niin että lasketaan pienempien
+                // ja samankokoisten määrä ja hyödynnetään tätä määrää uuden alkion lisäysindeksinä 
+                int pienemmät = (int)super
+                    .stream()
+                    .map(Comparable.class::cast)
+                    .filter(s->s.compareTo(uusi) <= 0)
+                    .count();
+
+                super.add(pienemmät, uusi);
+            }
+        }
+        catch (Exception e) {
+            throw new IllegalArgumentException();
+        }
+    }
 }

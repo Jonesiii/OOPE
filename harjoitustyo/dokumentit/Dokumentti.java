@@ -152,7 +152,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     public boolean sanatTäsmäävät(LinkedList<String> hakusanat)
     throws IllegalArgumentException {
         try {
-            if (hakusanat.isEmpty() == true) {
+            if (hakusanat.isEmpty()) {
                 throw new IllegalArgumentException();
             }
             else {
@@ -204,7 +204,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     public void siivoa(LinkedList<String> sulkusanat, String välimerkit)
     throws IllegalArgumentException {
         try {
-            if (sulkusanat.isEmpty() == true || välimerkit == "") {
+            if (sulkusanat.isEmpty() || välimerkit == "") {
                 throw new IllegalArgumentException();
             }
             else {
