@@ -1,6 +1,6 @@
 package harjoitustyo.omalista;
 /**
- * LinkedLististä peritty geneerinen oma lista -luokka.
+ * LinkedLististä peritty geneerinen omalista -luokka.
  * <p>
  * Olio-ohjelmoinnin perusteet II, kevät 2020.
  * 
@@ -41,7 +41,10 @@ public class OmaLista<E> extends LinkedList<E> implements Ooperoiva<E> {
     @SuppressWarnings({"unchecked"})
     public void lisää(E uusi) throws IllegalArgumentException {
         try {
+            // jotta try catch tajuaa, ettei listalle voi lisätä viitettä olioon, 
+            // jonka luokalla ei ole Comparable<T>-rajapinnan toteutusta.
             Comparable uusi1 = (Comparable)uusi;
+            // lisättävä ei saa olla null
             if (uusi == null) {
                 throw new IllegalArgumentException();
             }

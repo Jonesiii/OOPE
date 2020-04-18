@@ -12,6 +12,7 @@ import harjoitustyo.dokumentit.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import harjoitustyo.omalista.*;
+import harjoitustyo.kokoelma.*;
 
 public class Oope2HT {
     public static void main(String[] args) {
@@ -83,5 +84,16 @@ public class Oope2HT {
         System.out.println(lista5);
         lista5.lisää("A");
         System.out.println(lista5);
+
+        System.out.println();
+
+        Vitsi vitsi3 = new Vitsi(3, "miscellaneous", "Nothing sucks like a Hoover.");
+        Kokoelma korpus = new Kokoelma();
+        korpus.lisää(vitsi3);
+        Dokumentti tulos = korpus.hae(3);
+        // Metodi palauttaa viitteen, joka liittyy kokoelman ainoaan dokumenttiin.
+        boolean samaOlio = tulos == vitsi3; // true
+        System.out.println(samaOlio);
+        System.out.println(tulos);
     }
 }
