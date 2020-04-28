@@ -96,10 +96,9 @@ public class Käyttöliittymä {
     * silmukka pyörii kunnes käyttäjä antaa sille quit-komennon.
     */
     public void pääsilmukka() {
-        // kopioidaan kokoelman omalista, jotta reset-komennon yhteydessä muokattua
-        // ja alkuperäistä kokoelmaa voidaan verrata keskenään
         boolean pyörii = true;
         boolean kaiutus = false;
+        // esitellään silmukan ulkopuolella, jottei luoda koko ajan uutta scanneria.
         Scanner lukija = new Scanner(System.in);
         while (pyörii) {
             System.out.println("Please, enter a command:");
@@ -110,17 +109,17 @@ public class Käyttöliittymä {
             // jaetaan komento kahteen osaan; itse komentoon ja sen parametriin
             String[] komento = komento1.split(" ", 2);
 
-            // quit-komento
-            if (komento[0].equals(LOPETA)) {
+            // LOPETA-KOMENTO
+            if (komento[0].equals(LOPETA) && komento.length == 1) {
                 System.out.println("Program terminated.");
                 lukija.close();
                 pyörii = false;
             }
-            // tulosta-komento
-            else if (komento[0].equals(TULOSTA)) {
+            // TULOSTA-KOMENTO
+            else if (komento[0].equals(TULOSTA) && komento.length == 2) {
                 try {
-                    // print-komennolla saa olla vain 1 parametri, joka voi olla vain kokonaisluku
-                    if (komento.length == 2 && komento[1].split(" ").length == 1){
+                    // print-komennolla saa olla vain 1 parametri, jota ei saa jakaa osiin
+                    if (komento[1].split(" ").length == 1){
                         Dokumentti tuloste = korpus.hae(Integer.parseInt(komento[1]));
                         if (tuloste == null) {
                             System.out.println("Error!");
@@ -142,35 +141,17 @@ public class Käyttöliittymä {
                     System.out.println("Error!");
                 }
             }
-            // lisää-komento
-            else if (komento[0].equals(LISAA)) {
-                // jaetaan komennon loppuosa erottimella osiin
-                String[] osat = komento[1].split(Dokumentti.EROTIN);
-
-                // haetaan ensimmäinen kokoelmassa oleva alkio, jotta voidaan myöhemmin 
-                // päätellä onko kokoelmassa uutisia vai vitsejä
-                Dokumentti eka = korpus.dokumentit().getFirst();
-                
-                // huomioidaan, että vain yhden vitsin tai uutisen voi lisätä kerrallaan, eikä
-                // tunniste saa olla sama kuin jo kokoelmassa olevalla dokumentilla
-                if (osat.length != 3 || korpus.hae(Integer.parseInt(osat[0])) != null) {
-                    System.out.println("Error!");
-                }
-                else if (eka.getClass() == Vitsi.class && Character.isLetter(osat[1].charAt(0))) {
-                    Vitsi vitsi = new Vitsi(Integer.parseInt(osat[0]), osat[1], osat[2]);
-                    korpus.lisää(vitsi);
-                }
-                else if (eka.getClass() == Uutinen.class && Character.isDigit(osat[1].charAt(0))) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-                    Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]), LocalDate.parse(osat[1], formatter), osat[2]);
-                    korpus.lisää(uutinen);
+            // LISÄÄ-KOMENTO
+            else if (komento[0].equals(LISAA) && komento.length == 2) {
+                if (korpus.luoDokumentti(komento[1]) != null) {
+                    korpus.lisää(korpus.luoDokumentti(komento[1]));
                 }
                 else {
                     System.out.println("Error!");
                 }
             }
-            // hae-komento
-            else if (komento[0].equals(HAE)) {
+            // HAE-KOMENTO
+            else if (komento[0].equals(HAE) && komento.length >= 2) {
                 // luodaan lista komennon parametreista, jotta se voidaan 
                 // antaa parametrina dokumentti-luokan sanatTäsmäävät metodille
                 LinkedList<String> hakusanat = new LinkedList<String>(Arrays.asList(komento[1].split(" ")));
@@ -180,8 +161,8 @@ public class Käyttöliittymä {
                     }
                 }
             }
-            // poista-komento
-            else if (komento[0].equals(POISTA)) {
+            // POISTA-KOMENTO
+            else if (komento[0].equals(POISTA) && komento.length == 2) {
                 // Haetaan komennossa annetulla parametrilla kokoelmasta.
                 // Jos parametri on virheellinen, metodi palauttaa null-arvon.
                 Dokumentti poistettava = korpus.hae(Integer.parseInt(komento[1]));
@@ -192,8 +173,8 @@ public class Käyttöliittymä {
                     korpus.dokumentit().remove(Integer.parseInt(komento[1]) - 1);
                 }
             }
-            // siivoa-komento
-            else if (komento[0].equals(SIIVOA)) {
+            // SIIVOA-KOMENTO
+            else if (komento[0].equals(SIIVOA) && komento.length == 2) {
                 // Iteroidaan kokoelman läpi hyödyntäen jokaisen dokumentin kohdalla
                 // Dokumentti-luokan siivoa-metodia.
                 for (int i = 0; i < korpus.dokumentit().size(); i++) {
@@ -205,14 +186,14 @@ public class Käyttöliittymä {
                     korpus.dokumentit().get(i).siivoa(iterointilista, komento[1]);
                 }
             }
-            // reset-komento
-            else if (komento[0].equals(PERU)) {
+            // RESET-KOMENTO
+            else if (komento[0].equals(PERU) && komento.length == 1) {
                 // Lukee kokoelman luomisen yhteydessä tallennetun tiedostonimen kautta
                 // tiedoston uudelleen ja korvaa vanhan dokumentit-attribuutin uudella
                 korpus.dokumentit(korpus.lisääKokoelmaan(korpus.tiedostoPolku()).dokumentit());
             }
-            // kaiuta-komento
-            else if (komento[0].equals(KAIUTA)) {
+            // KAIUTA-KOMENTO
+            else if (komento[0].equals(KAIUTA) && komento.length == 1) {
                 if (kaiutus == false) {
                     System.out.println(komento1);
                     kaiutus = true;
@@ -221,7 +202,7 @@ public class Käyttöliittymä {
                     kaiutus = false;
                 }
             }
-            // jos komento kirjoitetaan väärin
+            // jos komento kirjoitetaan väärin tai annetaan väärä määrä parametreja
             else {
                 System.out.println("Error!");
             }

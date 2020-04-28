@@ -159,6 +159,42 @@ public class Kokoelma implements Kokoava<Dokumentti>{
         }
         return lista;
     }
+    /**
+    * Luo vitsin tai uutisen riippuen onko kokoelmassa vitsejä vai uutisia.
+    * <p>
+    * Metodi selvittää ensin, onko syöte oikeanlainen ja tarkistaa samalla,
+    * ettei annetulla numerolla ole jo lisätty dokumenttia. Seuraavaksi se
+    * päättelee onko kokoelmassa uutisia vai vitsejä ja luo päättelyn
+    * perusteella uuden vitsin tai uutisen.
+    *
+    * @param dokkari käyttäjän antama merkkijono
+    * @return vitsi tai uutinen
+    */
+    public Dokumentti luoDokumentti(String dokkari) {
+        // jaetaan merkkijono osiin
+        String[] osat = dokkari.split(Dokumentti.EROTIN);
+        if (osat.length != 3 || hae(Integer.parseInt(osat[0])) != null) {
+            return null;
+        }
+        // tarkastetaan onko kokoelmassa vitsejä vai uutisia ja luodaan sen perusteella 
+        // uusi vitsi/uutinen
+        else { 
+            if (dokumentit().getFirst().getClass() == Vitsi.class
+            && Character.isLetter(osat[1].charAt(0))) {
+                Vitsi vitsi = new Vitsi(Integer.parseInt(osat[0]), osat[1], osat[2]);
+                return vitsi;
+            }
+            else if (dokumentit().getFirst().getClass() == Uutinen.class
+            && Character.isDigit(osat[1].charAt(0))) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+                Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]), LocalDate.parse(osat[1], formatter), osat[2]);
+                return uutinen;
+            }
+            else {
+                return null;
+            }
+        }
+    }
 
     /**
     * Luo merkkijonon kaikista kokoelman dokumenteista.
