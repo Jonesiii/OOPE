@@ -2,3 +2,5 @@
 *.class
 # Estetään zip-tiedostojen lisääminen
 *.zip
+# Estetään oman testiluokan lisääminen
+Testi.java

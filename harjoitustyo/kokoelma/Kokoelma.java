@@ -1,4 +1,6 @@
 package harjoitustyo.kokoelma;
+import java.io.FileNotFoundException;
+
 /**
  * Konkreettinen luokka dokumenttine hallinnointiin.
  * <p>
@@ -10,6 +12,10 @@ package harjoitustyo.kokoelma;
 import harjoitustyo.apulaiset.*;
 import harjoitustyo.omalista.*;
 import harjoitustyo.dokumentit.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.io.*;
 
 public class Kokoelma implements Kokoava<Dokumentti>{
     /*
@@ -20,6 +26,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
     /** Dokumentit listana. */
     private OmaLista<Dokumentti> dokumentit;
 
+    /** Tiedoston polku, joka luetaan ohjelman käynnistyessä */
+    private String tiedostoPolku;
     /*
      * Rakentaja
      * 
@@ -33,8 +41,123 @@ public class Kokoelma implements Kokoava<Dokumentti>{
      * 
      */
 
+    public String tiedostoPolku() {
+        return tiedostoPolku;
+    }
+    
+    public void tiedostoPolku(String uusiTiedosto) {
+        if (uusiTiedosto != null) {
+            tiedostoPolku = uusiTiedosto;
+        }
+    }
+
     public OmaLista<Dokumentti> dokumentit() {
         return dokumentit;
+    }
+    public void dokumentit(OmaLista<Dokumentti> uusiLista) {
+        if (uusiLista != null) {
+            dokumentit = uusiLista;
+        }
+    }
+
+
+    /*
+     * Luokan omat metodit.
+     * 
+     */
+
+    /**
+    * Lukee saamansa tekstitiedoston ja lisää sen sisällön kokoelmaan joko
+    * vitsiksi tai uutiseksi.
+    * <p>
+    * Tekstistä päätellään onko se vitsi vai uutinen EROTTIMIEN välissä olevaa
+    * merkkijonoa tarkastelemalla.
+    *
+    * @param tiedosto komentoriviparametrina saatu tekstitiedosto.
+    */
+    public Kokoelma lisääKokoelmaan(String tiedostonNimi) {
+        // Esitellään viite try-lohkon ulkopuolella, jotta voidaan sulkea lukija
+        // tarvittaessa virheen tapahtuessa.
+        Scanner tiedostonLukija = null;
+
+        // luodaan kokoelma
+        Kokoelma korpus = new Kokoelma();
+        // tallennetaan tiedostopolku reset-komentoa varten
+        korpus.tiedostoPolku(tiedostonNimi);
+
+        // Varaudutaan poikeukseen.
+        try {
+            // Avataan tiedosto.
+            File tiedosto = new File(tiedostonNimi);
+
+            // Liitetään lukija tiedostoon.
+            tiedostonLukija = new Scanner(tiedosto);
+
+            // Luetaan tiedostosta
+            while (tiedostonLukija.hasNextLine()) {
+                // Luetaan rivi tiedostosta.
+                String rivi = tiedostonLukija.nextLine();
+
+                //tarkastetaan onko kyseessä uutinen vai vitsi
+                String[] osat = rivi.split(Dokumentti.EROTIN);
+                // lisätään vitsi
+                if (Character.isLetter(osat[1].charAt(0))) {
+                    Vitsi vitsi = new Vitsi(Integer.parseInt(osat[0]), osat[1], osat[2]);
+                    korpus.lisää(vitsi);
+                }
+                // lisätään uutinen
+                else {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
+                    Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]), LocalDate.parse(osat[1], formatter), osat[2]);
+                    korpus.lisää(uutinen);
+                }
+            }
+        }
+        // otetaan file not found kiinni
+        catch (FileNotFoundException e) {
+            System.out.println("Missing file!\nProgram terminated.");
+            return null;
+        }
+        tiedostonLukija.close();
+        return korpus;
+    }
+
+    /**
+    * Lukee saamansa tekstitiedoston ja lisää sen sisällön sulkulistaan.
+    * <p>
+    * Tekstistä päätellään onko se vitsi vai uutinen EROTTIMIEN välissä olevaa
+    * merkkijonoa tarka
+    *
+    * @param tiedosto komentoriviparametrina saatu tekstitiedosto.
+    */
+    public LinkedList<String> luoSulkulista(String tiedostonNimi) {
+        // Esitellään viite try-lohkon ulkopuolella, jotta voidaan sulkea lukija
+        // tarvittaessa virheen tapahtuessa.
+        Scanner tiedostonLukija = null;
+
+        // luodaan linkitetty lista
+        LinkedList<String> lista = new LinkedList<String>();
+
+        // Varaudutaan poikeukseen.
+        try {
+            // Avataan tiedosto.
+            File tiedosto = new File(tiedostonNimi);
+
+            // Liitetään lukija tiedostoon.
+            tiedostonLukija = new Scanner(tiedosto);
+
+            // Luetaan tiedostosta
+            while (tiedostonLukija.hasNextLine()) {
+                // Luetaan rivi tiedostosta.
+                String rivi = tiedostonLukija.nextLine();
+                lista.addLast(rivi);
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Missing file!\nProgram terminated.");
+            return null;
+        }
+        return lista;
     }
 
     /*

@@ -99,7 +99,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     @Override
    public boolean equals(Object obj) {
       try {
-         // liitetään olioon akku-luokan viite
+         // liitetään olioon dokumentti-luokan viite
          Dokumentti toinen = (Dokumentti)obj;
 
          // dokumentit ovat samat jos niiden tunnisteet ovat samat
@@ -201,6 +201,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     * @throws IllegalArgumentException jos jompikumpi parametri on tyhjä tai null-
     * arvoinen.
     */
+    @Override
     public void siivoa(LinkedList<String> sulkusanat, String välimerkit)
     throws IllegalArgumentException {
         try {
