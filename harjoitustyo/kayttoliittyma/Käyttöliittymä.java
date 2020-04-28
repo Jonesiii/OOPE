@@ -100,9 +100,9 @@ public class Käyttöliittymä {
         // ja alkuperäistä kokoelmaa voidaan verrata keskenään
         boolean pyörii = true;
         boolean kaiutus = false;
+        Scanner lukija = new Scanner(System.in);
         while (pyörii) {
             System.out.println("Please, enter a command:");
-            Scanner lukija = new Scanner(System.in);
             String komento1 = lukija.nextLine();
             if (kaiutus == true) {
                 System.out.println(komento1);
@@ -118,12 +118,28 @@ public class Käyttöliittymä {
             }
             // tulosta-komento
             else if (komento[0].equals(TULOSTA)) {
-                Dokumentti tuloste = korpus.hae(Integer.parseInt(komento[1]));
-                if (tuloste == null) {
-                    System.out.println("Error!");
+                try {
+                    // print-komennolla saa olla vain 1 parametri, joka voi olla vain kokonaisluku
+                    if (komento.length == 2 && komento[1].split(" ").length == 1){
+                        Dokumentti tuloste = korpus.hae(Integer.parseInt(komento[1]));
+                        if (tuloste == null) {
+                            System.out.println("Error!");
+                        }
+                        else {
+                            System.out.println(tuloste);
+                        }
+                    }
+                    else if (komento.length == 1) {
+                        System.out.println(korpus.luoTuloste());
+                    }
+                    else {
+                        System.out.println("Error!");
+                    }
                 }
-                else {
-                    System.out.println(tuloste);
+                // jos käyttäjä yrittää syöttää numeron tilalla muuta merkkiä print-komennon
+                // parametriksi
+                catch (NumberFormatException e) {
+                    System.out.println("Error!");
                 }
             }
             // lisää-komento
@@ -195,6 +211,7 @@ public class Käyttöliittymä {
                 // tiedoston uudelleen ja korvaa vanhan dokumentit-attribuutin uudella
                 korpus.dokumentit(korpus.lisääKokoelmaan(korpus.tiedostoPolku()).dokumentit());
             }
+            // kaiuta-komento
             else if (komento[0].equals(KAIUTA)) {
                 if (kaiutus == false) {
                     System.out.println(komento1);
@@ -203,6 +220,10 @@ public class Käyttöliittymä {
                 else {
                     kaiutus = false;
                 }
+            }
+            // jos komento kirjoitetaan väärin
+            else {
+                System.out.println("Error!");
             }
         }
     }

@@ -64,27 +64,4 @@ public class OmaLista<E> extends LinkedList<E> implements Ooperoiva<E> {
             throw new IllegalArgumentException();
         }
     }
-    /**
-    * Kopioi listan.
-    * <p>
-    * Luo toisen listan, jolle kopioi kaikki isäntälistan alkiot.
-    */
-
-    public OmaLista<E> kopioi() {
-        OmaLista<E> lista = new OmaLista<E>();
-        for (int i = 0; i < super.size(); i++) {
-            lista.addLast(super.get(i));
-        }
-        return lista;
-    }
-
-    /**
-    * Tyhjentää ja täyttää listan parametrina saadun listan alkioilla.
-    */
-    public void tyhjennäJaTäytä(OmaLista<E> lista) {
-        super.clear();
-        for (int i = 0; i < lista.size(); i++) {
-            super.addLast(lista.get(i));
-        }
-    }
 }

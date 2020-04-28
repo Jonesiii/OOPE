@@ -160,6 +160,27 @@ public class Kokoelma implements Kokoava<Dokumentti>{
         return lista;
     }
 
+    /**
+    * Luo merkkijonon kaikista kokoelman dokumenteista.
+    * <p>
+    * Merkkijonossa dokumentit erotellaan toisistaan rivinvaihdolla.
+    *
+    * @return kaikkien dokumenttien merkkijonoesitys
+    */
+    public String luoTuloste() {
+        String tuloste = "";
+        for (int i = 0; i < dokumentit.size(); i++) {
+            // vika rivi ilman rivinvaihtoa
+            if (i == dokumentit.size() - 1) {
+                tuloste = tuloste.concat(dokumentit.get(i).toString());
+            }
+            else {
+                tuloste = tuloste.concat(dokumentit.get(i).toString()+"\n");
+            }
+        }
+        return tuloste;
+    }
+
     /*
      * Kokoava-rajapinnan metodien korvaukset.
      * 
