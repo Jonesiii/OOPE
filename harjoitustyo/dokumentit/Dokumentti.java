@@ -1,6 +1,6 @@
 package harjoitustyo.dokumentit;
 import harjoitustyo.apulaiset.*;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Abstrakti juuriluokka dokumenteile.

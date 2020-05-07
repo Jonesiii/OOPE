@@ -13,7 +13,7 @@ import harjoitustyo.omalista.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-public class Käyttöliittymä {
+public class Kayttoliittyma {
     /* 
      * Julkiset luokkavakiot.
      *
@@ -52,7 +52,7 @@ public class Käyttöliittymä {
      * 
      */
 
-    public Käyttöliittymä(Kokoelma uusiKorpus, LinkedList<String> uusiSulkulista) {
+    public Kayttoliittyma(Kokoelma uusiKorpus, LinkedList<String> uusiSulkulista) {
         korpus(uusiKorpus);
         sulkulista(uusiSulkulista);
     }
@@ -116,10 +116,10 @@ public class Käyttöliittymä {
                 pyörii = false;
             }
             // TULOSTA-KOMENTO
-            else if (komento[0].equals(TULOSTA) && komento.length == 2) {
+            else if (komento[0].equals(TULOSTA) && komento.length <= 2) {
                 try {
                     // print-komennolla saa olla vain 1 parametri, jota ei saa jakaa osiin
-                    if (komento[1].split(" ").length == 1){
+                    if (komento.length == 2){
                         Dokumentti tuloste = korpus.hae(Integer.parseInt(komento[1]));
                         if (tuloste == null) {
                             System.out.println("Error!");
@@ -170,20 +170,32 @@ public class Käyttöliittymä {
                     System.out.println("Error!");
                 }
                 else {
-                    korpus.dokumentit().remove(Integer.parseInt(komento[1]) - 1);
+                    // etsitään poistettava
+                    for (int i = 0; i < korpus.dokumentit().size(); i++) {
+                        if (korpus.dokumentit().get(i).equals(poistettava)) {
+                            korpus.dokumentit().remove(i);
+                        }
+                    }
                 }
             }
             // SIIVOA-KOMENTO
             else if (komento[0].equals(SIIVOA) && komento.length == 2) {
-                // Iteroidaan kokoelman läpi hyödyntäen jokaisen dokumentin kohdalla
-                // Dokumentti-luokan siivoa-metodia.
-                for (int i = 0; i < korpus.dokumentit().size(); i++) {
-                    // Koska siivoa metodi muokkaa saamaansa sulkusanalistaa,
-                    // luodaan listasta kopio, jotta metodi saa aina parametrina
-                    // alkuperäisen listan
-                    LinkedList<String> iterointilista = new LinkedList<String>();
-                    iterointilista = (LinkedList<String>) sulkulista.clone();
-                    korpus.dokumentit().get(i).siivoa(iterointilista, komento[1]);
+                // huomioidaan, että parametreja voi olla vain yksi
+                LinkedList<String> parametrit = new LinkedList<String>(Arrays.asList(komento[1].split(" ")));
+                if (parametrit.size() != 1) {
+                    System.out.println("Error!");
+                }
+                else {
+                    // Iteroidaan kokoelman läpi hyödyntäen jokaisen dokumentin kohdalla
+                    // Dokumentti-luokan siivoa-metodia.
+                    for (int i = 0; i < korpus.dokumentit().size(); i++) {
+                        // Koska siivoa metodi muokkaa saamaansa sulkusanalistaa,
+                        // luodaan listasta kopio, jotta metodi saa aina parametrina
+                        // alkuperäisen listan
+                        LinkedList<String> iterointilista = new LinkedList<String>();
+                        iterointilista = (LinkedList<String>) sulkulista.clone();
+                        korpus.dokumentit().get(i).siivoa(iterointilista, komento[1]);
+                    }
                 }
             }
             // RESET-KOMENTO

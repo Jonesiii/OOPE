@@ -2,12 +2,8 @@
 
 Tämä on olio-ohjelmoinnin perusteet 2 -kurssin harjoitustyö.
 
-WETO käyttää aina alkuperäistä _harjoitustyo.apulaiset_-pakkausta. Pakkauksen
-tiedostoja ei siksi ole syytä muuttaa ellet ole Mac- tai Linux-käyttäjä (katso
-alla).
-
-Projektipohjan juuressa on _.gitignore_-tiedosto, jolla estetään tavukoodin
-tallennus versionhallintaan. Lisää siihen tarvittaessa estoja.
+Ohjelma lukee tekstitiedostosta uutisia tai vitsejä ja antaa käyttäjän etsiä
+ja muokata niitä.
 
 ## Mac- ja Linux-käyttäjät
 

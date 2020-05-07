@@ -108,7 +108,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
                 // lisätään uutinen
                 else {
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-                    Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]), LocalDate.parse(osat[1], formatter), osat[2]);
+                    Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]),
+                    LocalDate.parse(osat[1], formatter), osat[2]);
                     korpus.lisää(uutinen);
                 }
             }
@@ -187,7 +188,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
             else if (dokumentit().getFirst().getClass() == Uutinen.class
             && Character.isDigit(osat[1].charAt(0))) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d.M.yyyy");
-                Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]), LocalDate.parse(osat[1], formatter), osat[2]);
+                Uutinen uutinen = new Uutinen(Integer.parseInt(osat[0]),
+                LocalDate.parse(osat[1], formatter), osat[2]);
                 return uutinen;
             }
             else {

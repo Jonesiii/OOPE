@@ -34,7 +34,7 @@ public class Oope2HT {
 
             // Kutsutaan käyttöliittymää pyörittävää metodia
             if (korpus != null && sulkulista != null) {
-                Käyttöliittymä käyttis = new Käyttöliittymä(korpus.lisääKokoelmaan(lisättävät), sulkulista);
+                Kayttoliittyma käyttis = new Kayttoliittyma(korpus.lisääKokoelmaan(lisättävät), sulkulista);
                 käyttis.pääsilmukka();
             }
         }
