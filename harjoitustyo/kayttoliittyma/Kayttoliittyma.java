@@ -129,7 +129,11 @@ public class Kayttoliittyma {
                         }
                     }
                     else if (komento.length == 1) {
-                        System.out.println(korpus.luoTuloste());
+                        String tuloste = korpus.luoTuloste();
+                        // tulostetaan vain, jos kokoelmassa on tulostettavaa
+                        if (tuloste != "") {
+                            System.out.println(tuloste);
+                        }
                     }
                     else {
                         System.out.println("Error!");
