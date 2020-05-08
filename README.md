@@ -2,19 +2,36 @@
 
 Tämä on olio-ohjelmoinnin perusteet 2 -kurssin harjoitustyö.
 
-Ohjelma lukee tekstitiedostosta uutisia tai vitsejä ja antaa käyttäjän etsiä
-ja muokata niitä.
+Ohjelma lukee tekstitiedostosta uutisia tai vitsejä, lataa ne kokoelmaksi ohjel-
+maan ja antaa käyttäjän etsiä, muokata ja tulostaa niitä.
 
-## Mac- ja Linux-käyttäjät
+## Käynnistys
 
-Projektipohjan tiedostojen rivinvaihdot ovat Windows-tyylisiä (CR & LF). Muuta
-rivinvaihdot tarvittaessa Mac/Linux-muotoon (LF). Tämä onnistuu todennäköisesti
-käyttämälläsi editorilla tai IDE:llä. **Älä muuta** _harjoitustyo.apulaiset_
--pakkausta **millään muulla tavoin**.
+Ohjelma käynnistetään komentoikkunassa antamalla komentoriviparametreina kaksi
+tekstitiedostoa. Ensimmäinen tiedosto sisältää uutiset tai vitsit, jotka halutaan
+ladata ohjelman kokoelmaan. Toinen tekstitiedosto pitää sisällään listan sulkusa-
+noista.
 
-## Muuta
+## Komennot
 
-Perinteisesti tietovarastoissa on projektista kertova README.md-tiedosto. Korvaa
-siksi tämän tiedoston sisältö tekstillä, jossa kuvailet ohjelmaasi omin sanoin.
-Kerro lyhyesti mitä ohjelma tekee ja kuinka sitä käytetään. Käytä tekstissä
-muotoiluja. Tämän dokumentin mittainen teksti riittää hyvin.
+'''print''' -tulostaa kaikki kokoelman dokumentit tai yhden, jos sille antaa paramet-
+riksi dokumentin tunnisteen. Esim: "print 12".
+
+'''add''' -lisää käyttäjän määrittelemän dokumentin kokoelmaan. Parametrina komennolle
+pitää antaa tunniste///uutisen päivämäärä tai vitsin laji///teksti. Esim:
+"add 12///computing///When your hammer is C++, everything begins to look like a thumb."
+
+'''find''' -etsii dokumentin, joka sisältää parametrina saadut sanat. Esim: "find europe
+music".
+
+'''remove''' -poistaa halutun dokumentin kokoelmasta. Esim. "remove 12".
+
+'''polish''' -käsittelee kokoelmaa niin, että dokumenttien tekstistä poistetaan toisena
+komentoriviparametrina saadun listan sanat ja komennon paramterina saadut merkit.
+Esim: "polish :;!". Tämä poistaa siis sulkusanojen lisäksi merkit :, ; ja !.
+
+'''reset''' -kumoaa kaikki muutokset kokoelmaan.
+
+'''echo''' -kaiuttaa kaikki käyttäjän komennot. 
+
+'''quit''' -lopettaa ohjelman.

@@ -5,7 +5,7 @@ package harjoitustyo.dokumentit;
  * <p>
  * Olio-ohjelmoinnin perusteet II, kevät 2020.
  * 
- * @version 0.1
+ * @version 1.0
  * @author Joonas Arola, joonas.arola@tuni.fi.
  */
  

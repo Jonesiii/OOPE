@@ -73,7 +73,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
     * Tekstistä päätellään onko se vitsi vai uutinen EROTTIMIEN välissä olevaa
     * merkkijonoa tarkastelemalla.
     *
-    * @param tiedosto komentoriviparametrina saatu tekstitiedosto.
+    * @param tiedostonNimi komentoriviparametrina saatu tekstitiedosto.
+    * @return Kokoelma uutisista tai vitseistä
     */
     public Kokoelma lisääKokoelmaan(String tiedostonNimi) {
         // Esitellään viite try-lohkon ulkopuolella, jotta voidaan sulkea lukija
@@ -129,7 +130,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
     * Tekstistä päätellään onko se vitsi vai uutinen EROTTIMIEN välissä olevaa
     * merkkijonoa tarka
     *
-    * @param tiedosto komentoriviparametrina saatu tekstitiedosto.
+    * @param tiedostonNimi komentoriviparametrina saatu tekstitiedosto.
+    * @return lista sanoista, jotka poistetaan tekstistä siivoa-komennolla
     */
     public LinkedList<String> luoSulkulista(String tiedostonNimi) {
         // Esitellään viite try-lohkon ulkopuolella, jotta voidaan sulkea lukija

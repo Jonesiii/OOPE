@@ -7,7 +7,7 @@ import java.util.*;
  * <p>
  * Olio-ohjelmoinnin perusteet II, kevät 2020.
  * 
- * @version 0.1
+ * @version 1.0
  * @author Joonas Arola, joonas.arola@tuni.fi.
  */
 
@@ -37,7 +37,6 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
      * 
      */
 
-    /** Parametrillinen rakentaja */
     public Dokumentti(int uusiTunniste, String uusiTeksti) throws IllegalArgumentException {
         tunniste(uusiTunniste);
         teksti(uusiTeksti);
@@ -94,7 +93,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     /**
      * Vertaa dokumenttien tunnistetta.
      * 
-     * @return True, jos tunnisteet ovat samat. False, jos eivät.
+     * @return True jos tunnisteet ovat samat. False, jos eivät.
      */
     @Override
    public boolean equals(Object obj) {
@@ -113,7 +112,7 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
     /**
      * Vertaa dokumenttien tunnistetta.
      * 
-     * @return 0, jos samat. -1, jos pienempi. 1, jos suurempi.
+     * @return 0 jos samat. -1, jos pienempi. 1, jos suurempi.
      */
    @Override
    public int compareTo(Dokumentti d) {
@@ -225,21 +224,19 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
                     for (int j = 0; j < sanat.length; j++) {
                         // huomioidaan mahdollisuus, että sulkusana on dokumentin
                         // ensimmäinen tai viimeinen sana
-                        if (teksti.startsWith(sulkusanat.get(i))) {
-                            sulkusanat.set(i, sulkusanat.get(i) + " ");
-                            teksti = teksti.replace(sulkusanat.get(i), "");
-                        }
-                        else if (teksti.endsWith(sulkusanat.get(i))) {
-                            sulkusanat.set(i, " " + sulkusanat.get(i));
-                            teksti = teksti.replace(sulkusanat.get(i), "");
-                        }
-                        // kaikkien muiden sanojen osalta:
-                        else {
-                            sulkusanat.set(i, " " + sulkusanat.get(i) + " ");
-                            teksti = teksti.replace(sulkusanat.get(i), " ");
+                        if (sanat[j].equals(sulkusanat.get(i)) == true) {
+                            if (teksti.startsWith(sulkusanat.get(i))) {
+                                teksti = teksti.replace(sulkusanat.get(i) + " ", " ");
+                            }
+                            // muut sanat
+                            else {
+                                teksti = teksti.replace(" " + sulkusanat.get(i) + " ", " ");
+                            }
                         }
                     }
                 }
+                // poistetaan ylimääräiset välilyönnit 
+                teksti = teksti.trim().replaceAll("[ ]{2,}", " ");
             }
         }
         catch (NullPointerException e) {

@@ -62,22 +62,20 @@ public class Kayttoliittyma {
      * 
      */
 
-    /** Lukeva aksessori - korpus. */
     public Kokoelma korpus() {
         return korpus;
     }
-    /** Asettava aksessori - korpus. */
+
     public void korpus(Kokoelma uusiKorpus) {
         if (uusiKorpus != null) {
             korpus = uusiKorpus;
         }
     }
 
-    /** Lukeva aksessori - sulkulista. */
     public LinkedList<String> sulkulista() {
         return sulkulista;
     }
-    /** Asettava aksessori - sulkulista. */
+    
     public void sulkulista(LinkedList<String> uusiSulkulista) {
         if (uusiSulkulista != null) {
             sulkulista = uusiSulkulista;
@@ -96,11 +94,11 @@ public class Kayttoliittyma {
     * silmukka pyörii kunnes käyttäjä antaa sille quit-komennon.
     */
     public void pääsilmukka() {
-        boolean pyörii = true;
+        boolean pyorii = true;
         boolean kaiutus = false;
         // esitellään silmukan ulkopuolella, jottei luoda koko ajan uutta scanneria.
         Scanner lukija = new Scanner(System.in);
-        while (pyörii) {
+        while (pyorii) {
             System.out.println("Please, enter a command:");
             String komento1 = lukija.nextLine();
             if (kaiutus == true) {
@@ -113,7 +111,7 @@ public class Kayttoliittyma {
             if (komento[0].equals(LOPETA) && komento.length == 1) {
                 System.out.println("Program terminated.");
                 lukija.close();
-                pyörii = false;
+                pyorii = false;
             }
             // TULOSTA-KOMENTO
             else if (komento[0].equals(TULOSTA) && komento.length <= 2) {
