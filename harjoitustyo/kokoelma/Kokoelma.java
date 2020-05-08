@@ -1,14 +1,4 @@
 package harjoitustyo.kokoelma;
-import java.io.FileNotFoundException;
-
-/**
- * Konkreettinen luokka dokumenttine hallinnointiin.
- * <p>
- * Olio-ohjelmoinnin perusteet II, kevät 2020.
- * 
- * @version 0.1
- * @author Joonas Arola, joonas.arola@tuni.fi.
- */
 import harjoitustyo.apulaiset.*;
 import harjoitustyo.omalista.*;
 import harjoitustyo.dokumentit.*;
@@ -16,6 +6,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
+
+/**
+ * Konkreettinen luokka dokumenttine hallinnointiin.
+ * <p>
+ * Olio-ohjelmoinnin perusteet II, kevät 2020.
+ * 
+ * @version 1.0
+ * @author Joonas Arola, joonas.arola@tuni.fi.
+ */
+
 
 public class Kokoelma implements Kokoava<Dokumentti>{
     /*
@@ -274,7 +274,8 @@ public class Kokoelma implements Kokoava<Dokumentti>{
             if (dokumentit.get(i).tunniste() == tunniste) {
                 return dokumentit.get(i);
             }
-        } 
+        }
+        // jos ei löydy dokumenttia, palautetaan null
         return null;
     }
 }

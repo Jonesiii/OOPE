@@ -1,6 +1,7 @@
 package harjoitustyo.dokumentit;
 import harjoitustyo.apulaiset.*;
 import java.util.*;
+import java.util.stream.*;
 
 /**
  * Abstrakti juuriluokka dokumenteile.
@@ -218,23 +219,13 @@ public abstract class Dokumentti implements Comparable <Dokumentti>, Tietoinen <
                 }
                 // muunnetaan isot kirjaimet pieniksi
                 teksti = teksti.toLowerCase();
-                // poistetaan sulkusanat
-                String[] sanat = teksti.split(" ");
-                for (int i = 0; i < sulkusanat.size(); i++) {
-                    for (int j = 0; j < sanat.length; j++) {
-                        // huomioidaan mahdollisuus, että sulkusana on dokumentin
-                        // ensimmäinen tai viimeinen sana
-                        if (sanat[j].equals(sulkusanat.get(i)) == true) {
-                            if (teksti.startsWith(sulkusanat.get(i))) {
-                                teksti = teksti.replace(sulkusanat.get(i) + " ", " ");
-                            }
-                            // muut sanat
-                            else {
-                                teksti = teksti.replace(" " + sulkusanat.get(i) + " ", " ");
-                            }
-                        }
-                    }
-                }
+                // luodaan virta tekstin sanoista
+                teksti = Stream.of(teksti.split(" "))
+                // filtteröidään pois sulkusanat
+                .filter(s -> !sulkusanat.contains(s))
+                // kasataan takaisin merkkijonoksi
+                .collect(Collectors.joining(" "));
+
                 // poistetaan ylimääräiset välilyönnit 
                 teksti = teksti.trim().replaceAll("[ ]{2,}", " ");
             }

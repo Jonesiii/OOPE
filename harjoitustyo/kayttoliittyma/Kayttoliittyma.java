@@ -1,18 +1,19 @@
 package harjoitustyo.kayttoliittyma;
-/**
- * Konkreettinen luokka käyttöliittymälle.
- * <p>
- * Olio-ohjelmoinnin perusteet II, kevät 2020.
- * 
- * @version 0.1
- * @author Joonas Arola, joonas.arola@tuni.fi.
- */
 import harjoitustyo.kokoelma.*;
 import harjoitustyo.dokumentit.*;
 import harjoitustyo.omalista.*;
 import java.util.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+/**
+ * Konkreettinen luokka käyttöliittymälle.
+ * <p>
+ * Olio-ohjelmoinnin perusteet II, kevät 2020.
+ * 
+ * @version 1.0
+ * @author Joonas Arola, joonas.arola@tuni.fi.
+ */
+
 public class Kayttoliittyma {
     /* 
      * Julkiset luokkavakiot.
@@ -203,12 +204,7 @@ public class Kayttoliittyma {
                     // Iteroidaan kokoelman läpi hyödyntäen jokaisen dokumentin kohdalla
                     // Dokumentti-luokan siivoa-metodia.
                     for (int i = 0; i < korpus.dokumentit().size(); i++) {
-                        // Koska siivoa metodi muokkaa saamaansa sulkusanalistaa,
-                        // luodaan listasta kopio, jotta metodi saa aina parametrina
-                        // alkuperäisen listan
-                        LinkedList<String> iterointilista = new LinkedList<String>();
-                        iterointilista = (LinkedList<String>) sulkulista.clone();
-                        korpus.dokumentit().get(i).siivoa(iterointilista, komento[1]);
+                        korpus.dokumentit().get(i).siivoa(sulkulista, komento[1]);
                     }
                 }
             }

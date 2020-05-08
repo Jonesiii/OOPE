@@ -56,7 +56,7 @@ public class Uutinen extends Dokumentti {
      * Muodostaa dokumentin merkkijonoesityksen, joka koostuu yliluokan toStringistä
      * sekä tämän luokan päivämäärästä.
      * 
-     * @return dokumentin merkkijonoesitys.
+     * @return uutisen merkkijonoesitys.
      */
     @Override
     public String toString() {

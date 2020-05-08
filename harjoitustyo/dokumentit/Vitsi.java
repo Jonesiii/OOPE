@@ -55,7 +55,7 @@ public class Vitsi extends Dokumentti {
      * Muodostaa dokumentin merkkijonoesityksen, joka koostuu yliluokan toStringistä
      * sekä tämän luokan lajista.
      * 
-     * @return dokumentin merkkijonoesitys.
+     * @return vitsin merkkijonoesitys.
      */
     @Override
     public String toString() {

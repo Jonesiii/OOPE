@@ -1,18 +1,17 @@
 package harjoitustyo.omalista;
-/**
- * LinkedLististä peritty geneerinen omalista -luokka.
- * <p>
- * Olio-ohjelmoinnin perusteet II, kevät 2020.
- * 
- * @version 0.1
- * @author Joonas Arola, joonas.arola@tuni.fi.
- */
-
 import java.util.LinkedList;
 import java.util.Comparator;
 import harjoitustyo.apulaiset.*;
 import java.util.Iterator;
 import java.util.stream.*;
+/**
+ * LinkedLististä peritty geneerinen omalista -luokka.
+ * <p>
+ * Olio-ohjelmoinnin perusteet II, kevät 2020.
+ * 
+ * @version 1.0
+ * @author Joonas Arola, joonas.arola@tuni.fi.
+ */
 
 public class OmaLista<E> extends LinkedList<E> implements Ooperoiva<E> {
     /**
