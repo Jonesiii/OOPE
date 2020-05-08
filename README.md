@@ -45,7 +45,7 @@ remove 12
 ```
 
 ```polish``` -käsittelee kokoelmaa niin, että dokumenttien tekstistä poistetaan toisena
-komentoriviparametrina saadun listan sanat ja komennon paramterina saadut merkit.
+komentoriviparametrina saadun listan sanat ja komennon parametrina saadut merkit.
 
 ```
 polish :;!
