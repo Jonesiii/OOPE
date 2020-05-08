@@ -165,18 +165,30 @@ public class Kayttoliittyma {
             }
             // POISTA-KOMENTO
             else if (komento[0].equals(POISTA) && komento.length == 2) {
-                // Haetaan komennossa annetulla parametrilla kokoelmasta.
-                // Jos parametri on virheellinen, metodi palauttaa null-arvon.
-                Dokumentti poistettava = korpus.hae(Integer.parseInt(komento[1]));
-                if (poistettava == null) {
+                // huomioidaan, että parametreja voi olla vain yksi
+                LinkedList<String> parametrit = new LinkedList<String>(Arrays.asList(komento[1].split(" ")));
+                if (parametrit.size() != 1) {
                     System.out.println("Error!");
                 }
                 else {
-                    // etsitään poistettava
-                    for (int i = 0; i < korpus.dokumentit().size(); i++) {
-                        if (korpus.dokumentit().get(i).equals(poistettava)) {
-                            korpus.dokumentit().remove(i);
+                    // Haetaan komennossa annetulla parametrilla kokoelmasta.
+                    // Jos parametri on virheellinen, metodi palauttaa null-arvon.
+                    try {
+                        Dokumentti poistettava = korpus.hae(Integer.parseInt(komento[1]));
+                        if (poistettava == null) {
+                            System.out.println("Error!");
                         }
+                        else {
+                            // etsitään poistettava
+                            for (int i = 0; i < korpus.dokumentit().size(); i++) {
+                                if (korpus.dokumentit().get(i).equals(poistettava)) {
+                                    korpus.dokumentit().remove(i);
+                                }
+                            }
+                        }
+                    }
+                    catch (NumberFormatException e) {
+                        System.out.println("Error!");
                     }
                 }
             }

@@ -31,11 +31,15 @@ public class Oope2HT {
             String sulkusanat = args[1];
             Kokoelma korpus = new Kokoelma();
             LinkedList<String> sulkulista = korpus.luoSulkulista(sulkusanat);
+            korpus = korpus.lisääKokoelmaan(lisättävät);
 
             // Kutsutaan käyttöliittymää pyörittävää metodia
             if (korpus != null && sulkulista != null) {
                 Kayttoliittyma käyttis = new Kayttoliittyma(korpus.lisääKokoelmaan(lisättävät), sulkulista);
                 käyttis.pääsilmukka();
+            }
+            else {
+                System.out.println("Missing file!\nProgram terminated.");
             }
         }
     }
