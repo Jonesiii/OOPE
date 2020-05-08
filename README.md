@@ -2,15 +2,14 @@
 
 Tämä on olio-ohjelmoinnin perusteet 2 -kurssin harjoitustyö.
 
-Ohjelma lukee tekstitiedostosta uutisia tai vitsejä, lataa ne kokoelmaksi ohjel-
-maan ja antaa käyttäjän etsiä, muokata ja tulostaa niitä.
+Ohjelma lukee tekstitiedostosta uutisia tai vitsejä, lataa ne kokoelmaksi ohjelmaan
+ ja antaa käyttäjän etsiä, muokata ja tulostaa niitä.
 
 ## Käynnistys
 
 Ohjelma käynnistetään komentoikkunassa antamalla komentoriviparametreina kaksi
 tekstitiedostoa. Ensimmäinen tiedosto sisältää uutiset tai vitsit, jotka halutaan
-ladata ohjelman kokoelmaan. Toinen tekstitiedosto pitää sisällään listan sulkusa-
-noista.
+ladata ohjelman kokoelmaan. Toinen tekstitiedosto pitää sisällään listan sulkusanoista.
 
 ```
 java Oope2HT vitsit.txt sulkusanat.txt
@@ -18,8 +17,8 @@ java Oope2HT vitsit.txt sulkusanat.txt
 
 ## Komennot
 
-```print``` -tulostaa kaikki kokoelman dokumentit tai yhden, jos sille antaa paramet-
-riksi dokumentin tunnisteen.
+```print``` -tulostaa kaikki kokoelman dokumentit tai yhden, jos sille antaa parametriksi
+ dokumentin tunnisteen.
 
 ```
 print 12
