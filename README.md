@@ -12,7 +12,7 @@ tekstitiedostoa. Ensimmäinen tiedosto sisältää uutiset tai vitsit, jotka hal
 ladata ohjelman kokoelmaan. Toinen tekstitiedosto pitää sisällään listan sulkusanoista.
 
 ```
-java Oope2HT vitsit.txt sulkusanat.txt
+java Oope2HT jokes_oldies.txt stopwords.txt
 ```
 
 ## Komennot
